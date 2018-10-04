@@ -32,7 +32,16 @@ angular.module('ngLocalize')
         if (localeConf.persistSelection && $injector.has('$cookies')) {
             cookies = $injector.get('$cookies');
         }
-
+        function isLocalStorageAvail(){
+            var test = 'test';
+            try {
+                localStorage.setItem(test, test);
+                localStorage.removeItem(test);
+                return true;
+            } catch(e) {
+                return false;
+            }
+        }
         function splitToken(tok){
             var key, path;
             if (localeConf.allowNestedJson){
@@ -359,7 +368,7 @@ angular.module('ngLocalize')
 
                 if (cookies) {
                     cookies.put(localeConf.cookieName, lang);
-                }else if(localeConf.persistSelection){
+                }else if(localeConf.persistSelection && isLocalStorageAvail()){
                     // cookies service isnt availible and they want to persist, fallback to local storage
                     localStorage.setItem(localeConf.cookieName, lang);
                 }
@@ -399,7 +408,7 @@ angular.module('ngLocalize')
         function initialSetLocale() {
             var initial = getPreferredBrowserLanguage();
             var cookie = cookies && cookies.get(localeConf.cookieName);
-            var local = localeConf.persistSelection && localStorage.getItem(localeConf.cookieName);
+            var local = localeConf.persistSelection && isLocalStorageAvail() && localStorage.getItem(localeConf.cookieName);
             setLocale(cookie || local || initial);
         }
 
