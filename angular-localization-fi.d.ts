@@ -1,5 +1,5 @@
 export interface Locale {
-    setLocale(value:string);
-    getLocale() :string;
-    getString(key:string, params?:string[]):string;
+    setLocale(value: string);
+    getLocale(): string;
+    getString(key: string, params?: string | string[]): string;
 }
