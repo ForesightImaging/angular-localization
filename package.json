@@ -1,6 +1,7 @@
 {
   "name": "angular-localization-fi",
-  "version": "1.6.1",
+  "types": "./angular-localization-fi.d.ts",
+  "version": "1.6.2",
   "description": "modded version of angularjs localization done right.",
   "main": "dist/angular-localization-fi.js",
   "scripts": {
